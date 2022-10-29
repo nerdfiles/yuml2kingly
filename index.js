@@ -44,11 +44,12 @@ const If = (condition) => {
 const For = (World) => {
   return new Promise((resolve, reject) => {
     const list = []
+
     for (const token of World) {
       const parenLeft = '('
       const parenRight = ')'
-      // found something yuml-ish
 
+      // found something yuml-ish
       If(has(token, parenLeft))
         .then((res) => {
           list.push([
@@ -62,6 +63,7 @@ const For = (World) => {
         })
         .finally(() => {})
     }
+
     resolve(list)
   })
 }
