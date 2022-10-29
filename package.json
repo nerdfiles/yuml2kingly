@@ -1,0 +1,12 @@
+{
+  "name": "yuml2kingly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "#help": "npm run $(echo \"$(npm run)\" | percol)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "WTFPL"
+}
