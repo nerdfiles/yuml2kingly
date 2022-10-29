@@ -1,20 +1,56 @@
+/**
+ * @description .
+ */
+
+// ## includes
+
 const spacy = require('spacy')
 
-const Phraser = () {}
-const Axiomnizer = () {}
+// ## tools
+
+const Phraser = () => {}
+const Axiomnizer = () => {}
 const Lexer = () => {}
 const Parser = () => {}
+
+// ## constants
+// ## inputs
+// ## program
+// ## output
+// ## outcome (e.g., export default above)
+// ## try
+// ## test
+
+/**
+ * Doc.
+ */
 class Doc {
   constructor () {
   }
   extract () {
     return Parser()
   }
-  transform () {}
-  init () {}
+  transform () {
+    return Axiomnizer()
+  }
+  init () {
+    return Phraser(Lexer())
+  }
 }
+
+/**
+ * KinglyDocument.
+ *
+ * @extends {Doc}
+ */
 class KinglyDocument extends Doc {
 }
+
+/**
+ * YumlDocument.
+ *
+ * @extends {Doc}
+ */
 class YumlDocument extends Doc {
 }
 
