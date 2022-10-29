@@ -4,7 +4,8 @@
   "description": "yuml document parsing for kingly transitions (which can express link relation types for networked, hypermedia-driven, transformative, message-passing apis; i.e., hateoas)",
   "main": "index.js",
   "scripts": {
-    "#help": "npm run $(echo \"$(npm run)\" | percol)"
+    "#help": "npm run $(echo \"$(npm run)\" | percol)",
+    "spacy.server": "python ./node_modules/spacy/api/server.py"
   },
   "keywords": [],
   "author": "aha <patagnome@protonmail.com>",
