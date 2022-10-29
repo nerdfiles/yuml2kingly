@@ -145,16 +145,13 @@ class BespokeError {
   }
 }
 
-console
-  .table(
-    For(doc || [])
-      .then((res) => {
-        log(res)
-        return res
-      })
-      .catch(error => {
-        return new BespokeError(error)
-      })
-  )
+For(doc || [])
+  .then((res) => {
+    review(res)
+    return res
+  })
+  .catch(error => {
+    return new BespokeError(error)
+  })
 
 // EOF
