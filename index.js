@@ -54,10 +54,25 @@ class KinglyDocument extends Doc {
 class YumlDocument extends Doc {
 }
 
+const For = (World) => {
+  return new Promise((resolve, reject) => {
+    const s = []
+    for (let token of World) {
+      s.push(token.text)
+    }
+    resolve(s)
+  })
+}
+
 const str = (process && process.argv[2])
 const doc = new Doc(str.split(''), [])
-for (let token of doc) {
-  console.table(token.text)
-}
+
+For(doc)
+  .then((res) => {
+    console.log(res)
+  })
+  .finally(() =>{
+    console.log(For)
+  })
 
 // EOF
