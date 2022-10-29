@@ -4,12 +4,30 @@
 
 // ## includes
 
+const fs = require('fs')
+const path = require('path')
 const { Doc, Span } = require('spacy')
 
 // ## tools
 
 const log = console.log
 const review = console.table
+
+/**
+ * has.
+ *
+ * @param {} p
+ */
+const has = (t, p) =>
+  t.text.includes(p)
+
+/**
+ * holds.
+ *
+ * @param {} q
+ */
+const holds = (t, q) =>
+  t.text.indexOf(q) !== -1
 
 const Phraser = () => {}
 const Axiomnizer = () => {}
@@ -50,12 +68,15 @@ const For = (World) => {
       const parenRight = ')'
 
       // found something yuml-ish
-      If(has(token, parenLeft))
-        .then((res) => {
+      If(
+        has(token, parenLeft) ||
+        has(token, parenRight)
+      )
+        .then((response) => {
           list.push([
             STATEMENT,
-            ';if://',
-            res
+            ':',
+            response
           ].join(''))
         })
         .catch((error) => {
@@ -118,32 +139,17 @@ class KinglyDocument extends Doc {
 class YumlDocument extends Doc {
 }
 
+const FILENAME = (process && process.argv[2])
+const FILEPATH = path.join(__dirname, FILENAME)
+const FILE = fs.readFileSync(FILEPATH, 'utf-8')
+const SEP = ''
+const SPLIT_FILE = FILE.split(SEP)
+const DOCUMENT = new Doc(SPLIT_FILE, [])
+const INPUT = DOCUMENT || []
+
 const STATEMENT = '(R) => (R)'
 
-/**
- * has.
- *
- * @param {} p
- */
-const has = (t, p) =>
-  t.text.includes(p)
-
-/**
- * holds.
- *
- * @param {} q
- */
-const holds = (t, q) =>
-  t.text.indexOf(q) !== -1
-
-const str = (process && process.argv[2])
-const fs = require('fs')
-const path = require('path')
-const FILEPATH = path.join(__dirname, str)
-const FILE = fs.readFileSync(FILEPATH, 'utf-8')
-const SPLIT_FILE = FILE.split('')
-
-const doc = new Doc(SPLIT_FILE, [])
+// review(DOCUMENT)
 
 /**
  * BespokeError.
@@ -157,7 +163,7 @@ class BespokeError {
   }
 }
 
-For(doc || [])
+For(INPUT)
   .then((res) => {
     review(res)
     return res
