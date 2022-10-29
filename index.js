@@ -4,7 +4,7 @@
 
 // ## includes
 
-const spacy = require('spacy')
+const { Doc, Span } = require('spacy')
 
 // ## tools
 
@@ -22,9 +22,9 @@ const Parser = () => {}
 // ## test
 
 /**
- * Doc.
+ * Concept.
  */
-class Doc {
+class Concept {
   constructor () {
   }
   extract () {
@@ -54,17 +54,10 @@ class KinglyDocument extends Doc {
 class YumlDocument extends Doc {
 }
 
-(async function () {
-  const str = (process && process.argv[2]) || 'the cat is on the mat'
-  console.log(str)
-  const nlp = spacy.load('en_core_web_sm')
-  const doc = await nlp(str)
-  for (const ent of doc.ents) {
-    console.log(ent.text, ent.label)
-  }
-  for (const token of doc) {
-    console.log(token.text, token.pos, token.head.text)
-  }
-})()
+const str = (process && process.argv[2])
+const doc = new Doc(str.split(''), [])
+for (let token of doc) {
+  console.table(token.text)
+}
 
 // EOF
