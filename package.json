@@ -1,12 +1,12 @@
 {
   "name": "yuml2kingly",
   "version": "1.0.0",
-  "description": "",
+  "description": "yuml document parsing for kingly transitions (which can express link relation types for transformative apis; i.e., hateoas)",
   "main": "index.js",
   "scripts": {
     "#help": "npm run $(echo \"$(npm run)\" | percol)"
   },
   "keywords": [],
-  "author": "",
+  "author": "aha <patagnome@protonmail.com>",
   "license": "WTFPL"
 }
