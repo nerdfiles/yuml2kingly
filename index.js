@@ -99,9 +99,10 @@ const doc = new Doc(SPLIT_FILE, [])
  * BespokeError.
  */
 class BespokeError {
-  constructor (msg) {
+  constructor (error) {
     return new Error({
-      message: msg
+      status: '500',
+      message: error
     })
   }
 }
