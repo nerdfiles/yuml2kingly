@@ -6,6 +6,51 @@
 
 const { Doc, Span } = require('spacy')
 
+// ## tools
+
+const log = console.log
+const review = console.table
+
+const Phraser = () => {}
+const Axiomnizer = () => {}
+const Lexer = () => {}
+const Parser = () => {}
+
+/**
+ * For.
+ *
+ * @param {} World
+ */
+const For = (World) => {
+  return new Promise((resolve, reject) => {
+    const list = []
+    for (const token of World) {
+      const parenLeft = '('
+      const parenRight = ')'
+      // found something yuml-ish
+
+      If(has(token, parenLeft))
+        .then((res) => {
+          list.push([
+            STATEMENT,
+            ';if://',
+            res
+          ].join(''))
+        })
+        .catch((error) => {
+          return new BespokeError(error)
+        })
+        .finally(() => {})
+    }
+    resolve(list)
+  })
+}
+
+/**
+ * If.
+ *
+ * @param {} condition
+ */
 const If = (condition) => {
   return new Promise((resolve, reject) => {
     const ERROR = {
@@ -16,15 +61,6 @@ const If = (condition) => {
     condition && resolve(condition)
   })
 }
-
-// ## tools
-
-const log = console.log
-const review = console.table
-const Phraser = () => {}
-const Axiomnizer = () => {}
-const Lexer = () => {}
-const Parser = () => {}
 
 // ## constants
 // ## inputs
@@ -94,36 +130,6 @@ const has = (t, p) =>
 const holds = (t, q) =>
   t.text.indexOf(q) !== -1
 
-/**
- * For.
- *
- * @param {} World
- */
-const For = (World) => {
-  return new Promise((resolve, reject) => {
-    const list = []
-    for (const token of World) {
-      const parenLeft = '('
-      const parenRight = ')'
-      // found something yuml-ish
-
-      If(has(token, parenLeft))
-        .then((res) => {
-          list.push([
-            STATEMENT,
-            ';if://',
-            res
-          ].join(''))
-        })
-        .catch((error) => {
-          return new BespokeError(error)
-        })
-        .finally(() => {})
-    }
-    resolve(list)
-  })
-}
-
 const str = (process && process.argv[2])
 const fs = require('fs')
 const path = require('path')
@@ -139,7 +145,7 @@ const doc = new Doc(SPLIT_FILE, [])
 class BespokeError {
   constructor (error) {
     return new Error({
-      status: '500',
+      status: '400',
       message: error
     })
   }
