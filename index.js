@@ -76,9 +76,10 @@ const For = (World) => {
     for (const token of World) {
       const parenLeft = '('
       const parenRight = ')'
+      // found something yuml-ish
       const has = (p) => token.text.includes(p)
-      if (has(parenLeft) || has(parenRight)) {
-        list.push(token.text)
+      if (has(parenLeft)) {
+        list.push('(R) => (R)')
       }
     }
     resolve(list)
