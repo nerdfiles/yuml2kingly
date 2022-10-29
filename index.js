@@ -57,7 +57,11 @@ const If = (condition) => {
       status: !condition ? 400 : 200,
       message: !condition ? 'no input' : condition
     }
+
+    // happy path
     !condition && reject(ERROR)
+
+    // not non-un-happy path
     condition && resolve(condition)
   })
 }
