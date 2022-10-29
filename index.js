@@ -8,6 +8,8 @@ const { Doc, Span } = require('spacy')
 
 // ## tools
 
+const log = console.log
+const review = console.table
 const Phraser = () => {}
 const Axiomnizer = () => {}
 const Lexer = () => {}
@@ -56,27 +58,44 @@ class YumlDocument extends Doc {
 
 const For = (World) => {
   return new Promise((resolve, reject) => {
-    const s = []
-    for (let token of World) {
-      s.push(token.text)
+    const list = []
+    for (const token of World) {
+      const parenLeft = '('
+      const parenRight = ')'
+      const has = (p) => token.text.includes(p)
+      if (has(parenLeft) || has(parenRight)) {
+        list.push(token.text)
+      }
     }
-    resolve(s)
+    resolve(list)
   })
 }
 
 const str = (process && process.argv[2])
 const fs = require('fs')
 const path = require('path')
-const FILE = fs.readFileSync(path.join(__dirname, str), 'utf-8')
+const FILEPATH = path.join(__dirname, str)
+const FILE = fs.readFileSync(FILEPATH, 'utf-8')
 const SPLIT_FILE = FILE.split('')
 
 const doc = new Doc(SPLIT_FILE, [])
-For(doc || [])
+
+class BespokeError {
+  constructor (msg) {
+    return new Error({
+      message: msg
+    })
+  }
+}
+
+console
+  .table(For(doc || [])
   .then((res) => {
-    console.table(res)
+    log(res)
+    return res
   })
-  .finally(() =>{
-    console.log(For)
-  })
+  .catch(error => {
+    return new BespokeError(error)
+  }))
 
 // EOF

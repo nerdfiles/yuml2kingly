@@ -2,6 +2,6 @@
 // {generate:true}
 
 (start)->(aRb)
-(aRb)->end)
+(aRb)->(end)
 
 // {EOF}
