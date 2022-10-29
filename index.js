@@ -17,6 +17,26 @@ const Lexer = () => {}
 const Parser = () => {}
 
 /**
+ * If.
+ *
+ * @param {} condition
+ */
+const If = (condition) => {
+  return new Promise((resolve, reject) => {
+    const ERROR = {
+      status: !condition ? 400 : 200,
+      message: !condition ? 'no input' : condition
+    }
+
+    // happy path
+    !condition && reject(ERROR)
+
+    // not non-un-happy path
+    condition && resolve(condition)
+  })
+}
+
+/**
  * For.
  *
  * @param {} World
@@ -43,26 +63,6 @@ const For = (World) => {
         .finally(() => {})
     }
     resolve(list)
-  })
-}
-
-/**
- * If.
- *
- * @param {} condition
- */
-const If = (condition) => {
-  return new Promise((resolve, reject) => {
-    const ERROR = {
-      status: !condition ? 400 : 200,
-      message: !condition ? 'no input' : condition
-    }
-
-    // happy path
-    !condition && reject(ERROR)
-
-    // not non-un-happy path
-    condition && resolve(condition)
   })
 }
 
