@@ -65,11 +65,15 @@ const For = (World) => {
 }
 
 const str = (process && process.argv[2])
-const doc = new Doc(str.split(''), [])
+const fs = require('fs')
+const path = require('path')
+const FILE = fs.readFileSync(path.join(__dirname, str), 'utf-8')
+const SPLIT_FILE = FILE.split('')
 
-For(doc)
+const doc = new Doc(SPLIT_FILE, [])
+For(doc || [])
   .then((res) => {
-    console.log(res)
+    console.table(res)
   })
   .finally(() =>{
     console.log(For)

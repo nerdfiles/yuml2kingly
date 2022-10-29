@@ -1,0 +1,7 @@
+// {type:state}
+// {generate:true}
+
+(start)->(aRb)
+(aRb)->end)
+
+// {EOF}
