@@ -27,14 +27,23 @@ const Parser = () => {}
  * Concept.
  */
 class Concept {
-  constructor () {
-  }
+  /**
+   * extract.
+   */
   extract () {
     return Parser()
   }
+
+  /**
+   * transform.
+   */
   transform () {
     return Axiomnizer()
   }
+
+  /**
+   * init.
+   */
   init () {
     return Phraser(Lexer())
   }
@@ -56,6 +65,11 @@ class KinglyDocument extends Doc {
 class YumlDocument extends Doc {
 }
 
+/**
+ * For.
+ *
+ * @param {} World
+ */
 const For = (World) => {
   return new Promise((resolve, reject) => {
     const list = []
@@ -80,6 +94,9 @@ const SPLIT_FILE = FILE.split('')
 
 const doc = new Doc(SPLIT_FILE, [])
 
+/**
+ * BespokeError.
+ */
 class BespokeError {
   constructor (msg) {
     return new Error({
