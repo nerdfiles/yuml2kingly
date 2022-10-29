@@ -6,6 +6,17 @@
 
 const { Doc, Span } = require('spacy')
 
+const If = (condition) => {
+  return new Promise((resolve, reject) => {
+    const ERROR = {
+      status: !condition ? 400 : 200,
+      message: !condition ? 'no input' : condition
+    }
+    !condition && reject(ERROR)
+    condition && resolve(condition)
+  })
+}
+
 // ## tools
 
 const log = console.log
@@ -65,6 +76,24 @@ class KinglyDocument extends Doc {
 class YumlDocument extends Doc {
 }
 
+const STATEMENT = '(R) => (R)'
+
+/**
+ * has.
+ *
+ * @param {} p
+ */
+const has = (t, p) =>
+  t.text.includes(p)
+
+/**
+ * holds.
+ *
+ * @param {} q
+ */
+const holds = (t, q) =>
+  t.text.indexOf(q) !== -1
+
 /**
  * For.
  *
@@ -77,10 +106,19 @@ const For = (World) => {
       const parenLeft = '('
       const parenRight = ')'
       // found something yuml-ish
-      const has = (p) => token.text.includes(p)
-      if (has(parenLeft)) {
-        list.push('(R) => (R)')
-      }
+
+      If(has(token, parenLeft))
+        .then((res) => {
+          list.push([
+            STATEMENT,
+            ';if://',
+            res
+          ].join(''))
+        })
+        .catch((error) => {
+          return new BespokeError(error)
+        })
+        .finally(() => {})
     }
     resolve(list)
   })
