@@ -89,13 +89,15 @@ class BespokeError {
 }
 
 console
-  .table(For(doc || [])
-  .then((res) => {
-    log(res)
-    return res
-  })
-  .catch(error => {
-    return new BespokeError(error)
-  }))
+  .table(
+    For(doc || [])
+      .then((res) => {
+        log(res)
+        return res
+      })
+      .catch(error => {
+        return new BespokeError(error)
+      })
+  )
 
 // EOF
